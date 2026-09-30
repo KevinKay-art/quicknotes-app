@@ -1,0 +1,126 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f8;
+    color: #333;
+}
+
+header {
+    background-color: #167d7f;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+main {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+section {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+form input,
+form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form input {
+    flex: 1;
+}
+
+button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #167d7f;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #105c5e;
+}
+
+#error-message {
+    color: red;
+    min-height: 20px;
+}
+
+#search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#notes-list {
+    list-style: none;
+    padding: 0;
+}
+
+.note-card {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 12px 0;
+    background-color: #fafafa;
+}
+
+.category-personal {
+    border-left: 5px solid teal;
+}
+
+.category-work {
+    border-left: 5px solid darkred;
+}
+
+.category-study {
+    border-left: 5px solid blue;
+}
+
+.category-label {
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.note-date {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+@media (max-width: 600px) {
+    form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    form input,
+    form select,
+    form button {
+        width: 100%;
+    }
+}
