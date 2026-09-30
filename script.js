@@ -1,11 +1,16 @@
 const noteForm = document.querySelector("#note-form");
 const noteInput = document.querySelector("#note-input");
 const noteCategory = document.querySelector("#note-category");
+const searchInput = document.querySelector("#search-input");
 const notesList = document.querySelector("#notes-list");
 const noteCount = document.querySelector("#note-count");
 const errorMessage = document.querySelector("#error-message");
 
 let notes = [];
+
+function saveNotes() {
+    localStorage.setItem("quicknotes", JSON.stringify(notes));
+}
 
 function updateCount() {
     if (notes.length === 0) {
@@ -20,7 +25,21 @@ function updateCount() {
 function render() {
     notesList.textContent = "";
 
-    for (const note of notes) {
+    const searchTerm = searchInput.value.trim().toLowerCase();
+
+    const filteredNotes = notes.filter(note =>
+        note.text.toLowerCase().includes(searchTerm)
+    );
+
+    if (filteredNotes.length === 0 && searchTerm !== "") {
+        const message = document.createElement("li");
+        message.textContent = "No notes match your search.";
+        notesList.appendChild(message);
+        updateCount();
+        return;
+    }
+
+    for (const note of filteredNotes) {
         const listItem = document.createElement("li");
         listItem.classList.add("note-card");
         listItem.classList.add(`category-${note.category}`);
@@ -42,6 +61,7 @@ function render() {
 
         deleteButton.addEventListener("click", () => {
             notes = notes.filter(item => item.id !== note.id);
+            saveNotes();
             render();
         });
 
@@ -84,8 +104,20 @@ noteForm.addEventListener("submit", (event) => {
     };
 
     notes.push(newNote);
-
+    saveNotes();
     render();
 
     noteInput.value = "";
 });
+
+searchInput.addEventListener("input", () => {
+    render();
+});
+
+const savedNotes = localStorage.getItem("quicknotes");
+
+if (savedNotes !== null) {
+    notes = JSON.parse(savedNotes);
+}
+
+render();
